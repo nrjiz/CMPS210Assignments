@@ -10,3 +10,82 @@ Your main method should:
 Question 2:
 
 Write a program to check if a given string is a palindrome using a stack. A palindrome is a string that reads the same forwards and backward, ignoring spaces, punctuation, and capitalization.*/
+
+package asst9;
+
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Scanner;
+
+
+public class prb1 {
+
+	public static void main(String[] args) {
+
+		System.out.println("enter N, the number of integers.");
+		Scanner sc		= new Scanner (System.in);
+		int N = sc.nextInt();
+		Queue<Integer>q	= new LinkedList<Integer>();
+		while(N>0) {
+			System.out.println("enter an integer of your choice");
+			q.add(sc.nextInt());
+			N--;
+		}
+		rearrange(q);
+		System.out.println(q);
+	}
+	
+	
+	public static void rearrange(Queue <Integer>q) {
+		Queue <Integer> even	=	new LinkedList<Integer>();
+		Queue <Integer> odd		=	new LinkedList<Integer>();
+		while(!q.isEmpty()) {
+			if(q.peek()%2==0) {
+				even.add(q.remove());
+			}else {
+				odd.add(q.remove());
+			}
+		}
+		while(!even.isEmpty()){
+			q.add(even.remove());
+		}
+		while(!odd.isEmpty()) {
+			q.add(odd.remove());
+		}				
+	}
+}
+
+//problem 2 
+package asst9;
+
+import java.util.Stack;
+
+public class Prb2 {
+
+	public static void main(String[] args) {
+
+		String g = "Mr. Owl ate my metal worm";
+		System.out.println(isPalindrome(g));
+
+
+	}	
+	public static boolean isPalindrome (String str) {
+		str = str.toLowerCase();
+		str = str.replace(",","");
+		str = str.replace(".","");
+		str = str.replace(" ", "");
+		
+		Stack<Character>s = new Stack<Character>();
+		for (int i = 0 ; i < str.length(); i ++) {
+			s.push(str.charAt(i));
+		}
+		String newString = "";
+		while(!s.isEmpty()) {
+			newString+=s.pop();
+		}
+		return newString.equals(str);
+	}
+
+}
+
+
